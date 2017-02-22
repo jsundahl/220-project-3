@@ -6,10 +6,18 @@ with open("tweets.json", "r") as tweet_db:
     tweets = json.load(tweet_db)
 
     def flatten(xs):
-        return NotImplemented
+        if len(xs) == 0:
+            return []
+        else:
+            head = xs[0]
+            tail = xs[1:]
+            if isinstance(head, list):
+                return flatten(head) + flatten(tail)
+            else:
+                return [head] + flatten(tail)
 
     def difference(xs, ys):
-        """"Finds all the elements that are in either xs or ys , but not both"""
+        """"Finds all the elements that are in either xs or ys, but not both"""
         return NotImplemented
 
     def to_text(tweets):
