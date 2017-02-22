@@ -5,16 +5,23 @@ import json
 with open("tweets.json", "r") as tweet_db:
     tweets = json.load(tweet_db)
 
-    def flatten(xs):
+    def head(xs):
         if len(xs) == 0:
             return []
         else:
-            head = xs[0]
-            tail = xs[1:]
-            if isinstance(head, list):
-                return flatten(head) + flatten(tail)
+            return xs[0]
+
+    def tail(xs):
+        if len(xs) == 0:
+            return []
+        else:
+            return xs[1:]
+
+    def flatten(xs):
+            if isinstance(head(xs), list):
+                return flatten(head(xs)) + flatten(tail(xs))
             else:
-                return [head] + flatten(tail)
+                return [head(xs)] + flatten(tail(xs))
 
     def difference(xs, ys):
         """"Finds all the elements that are in either xs or ys, but not both"""
