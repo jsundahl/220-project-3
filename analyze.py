@@ -18,10 +18,12 @@ with open("tweets.json", "r") as tweet_db:
             return xs[1:]
 
     def flatten(xs):
-        if isinstance(xs, list):
-            return [element for sublist in xs for element in flatten(sublist)]
-        else:
-            return [xs]
+        def inner_flatten(ys, zs):
+            if isinstance(zs, list):
+                return ys + zs
+            else:
+                return ys + [zs]
+        return reduce(inner_flatten, xs, [])
 
     def difference(xs, ys):
         """"Finds all the elements that are in either xs or ys, but not both"""
@@ -30,11 +32,11 @@ with open("tweets.json", "r") as tweet_db:
 
     def to_text(tweets):
         """Converts from a list of tweets to a list of tweet contents"""
-        return NotImplemented
+        return list(map(lambda tweet: str(tweet["content"]), tweets))
 
     def to_lowercase(tweets):
         """Converts the content of each tweet in the list of tweets to lowercase"""
-        return NotImplemented
+        return list(map(lambda content: content.lower(), to_text(tweets)))
 
     def nonempty(tweets):
         """remove all tweets with empty contents from the list of tweets"""
