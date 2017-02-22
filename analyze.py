@@ -18,14 +18,15 @@ with open("tweets.json", "r") as tweet_db:
             return xs[1:]
 
     def flatten(xs):
-            if isinstance(head(xs), list):
-                return flatten(head(xs)) + flatten(tail(xs))
-            else:
-                return [head(xs)] + flatten(tail(xs))
+        if isinstance(xs, list):
+            return [element for sublist in xs for element in flatten(sublist)]
+        else:
+            return [xs]
 
     def difference(xs, ys):
         """"Finds all the elements that are in either xs or ys, but not both"""
-        return NotImplemented
+        # [everything that's in xs and not in ys] + [converse]
+        return list(filter(lambda x: x not in ys, xs)) + list(filter(lambda y: y not in xs, ys))
 
     def to_text(tweets):
         """Converts from a list of tweets to a list of tweet contents"""
