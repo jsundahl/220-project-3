@@ -69,8 +69,7 @@ with open("tweets.json", "r") as tweet_db:
 
     def all_caps_tweets(tweets):
         """Returns a list of all tweets that are completely capitalized from the given list of tweets"""
-        return NotImplemented
-
+        return list(filter(lambda tweet: tweet["content"].isupper(), tweets))
 
     def count_individual_words(tweets):
         """count word frequency and output as dictionary"""

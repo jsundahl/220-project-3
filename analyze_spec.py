@@ -72,5 +72,16 @@ class AnalyzeSpec(unittest.TestCase):
     def test_all_words_with(self):
         self.assertEqual(all_mentions(self.tweets), ["@oreillyfactor"])
 
+    def test_all_caps_tweets(self):
+        tweet = {
+            "username": "Donald J. Trump",
+            "source": "Twitter for Android",
+            "content": "#1 #2 3 @1 @2 ASDASDASD",
+            "favorites": 53588,
+            "retweets": 10836,
+            "number": 4
+        }
+        self.assertEqual(all_caps_tweets(self.tweets + [tweet]), [tweet])
+
 if __name__ == '__main__':
     unittest.main()
