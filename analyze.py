@@ -104,12 +104,15 @@ with open("tweets.json", "r") as tweet_db:
     def average_retweets(tweets):
         return average_x(tweets, "retweets")
 
+    def sort_by_x(tweets, x):
+        return sorted(tweets, key=lambda y: y[x])
+
     def sort_by_favorites(tweets):
         """"sort tweets in ascending order of number of favorites"""
-        return NotImplemented
+        return sort_by_x(tweets, "favorites")
 
     def sort_by_retweets(tweets):
-        return NotImplemented
+        return sort_by_x(tweets, "retweets")
 
     def upper_quartile(tweets):
         """"Assuming the input is sorted, find the tweet representative of

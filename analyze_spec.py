@@ -30,8 +30,8 @@ class AnalyzeSpec(unittest.TestCase):
             "username": "Donald J. Trump",
             "source": "Twitter for Android",
             "content": "",
-            "favorites": 53588,
-            "retweets": 10836,
+            "favorites": 53587,
+            "retweets": 10835,
             "number": 4
         }]
 
@@ -98,7 +98,13 @@ class AnalyzeSpec(unittest.TestCase):
 
     def test_average_x(self):
         self.assertEqual(average_favorites(self.tweets), 50176)
-        self.assertEqual(average_retweets(self.tweets), 10286)
+        self.assertEqual(average_retweets(self.tweets), 10285)
+
+    def nums(self, tweets):
+        return list(map(lambda x: x["number"], tweets))
+
+    def test_sort_by(self):
+        self.assertEqual(sort_by_favorites(self.tweets), [self.tweets[1], self.tweets[3], self.tweets[2], self.tweets[0]])
 
 if __name__ == '__main__':
     unittest.main()
