@@ -106,5 +106,9 @@ class AnalyzeSpec(unittest.TestCase):
     def test_sort_by(self):
         self.assertEqual(sort_by_favorites(self.tweets), [self.tweets[1], self.tweets[3], self.tweets[2], self.tweets[0]])
 
+    def test_top_quarter_by(self):
+        self.assertEqual(top_quarter_by(self.tweets, "favorites"), [self.tweets[0]])
+        self.assertEqual(bottom_quarter_by(self.tweets, "retweets"), [self.tweets[1]])
+
 if __name__ == '__main__':
     unittest.main()

@@ -62,6 +62,7 @@ with open("tweets.json", "r") as tweet_db:
 
     def create_word_dict(word_list):
         def concat_dicts(x, y):
+            # reduce again and loop over entries in y?
             return NotImplemented
         reduce(lambda x, y: concat_dicts(x, y), word_list, dict())
         return NotImplemented
@@ -118,20 +119,21 @@ with open("tweets.json", "r") as tweet_db:
         """"Assuming the input is sorted, find the tweet representative of
         the upper quartile. This is the tweet representing the 75th percentile in the characteristic the list
         has been sorted by. You can compute it as 3/4th of the size of the input"""
-        return NotImplemented
+        start_index = int(len(tweets) - round(len(tweets)/4))
+        return tweets[start_index:]
 
     def lower_quartile(tweets):
         """"Assuming the input is sorted, find the tweet representative of
         the lower quartile. This is the tweet representing the 25th percentile in the characteristic the list
         has been sorted by. You can compute it as 1/4th of the size of the input"""
-        return NotImplemented
+        end_index = int(round(len(tweets)/4))
+        return tweets[:end_index]
 
     def top_quarter_by(tweets, factor):
         """"Assuming the input is sorted by factor , find all
         tweets with factor greater than or equal to the upper quartile representative found using the
         upper_quartile function you’ve implemented"""
-        return NotImplemented
+        return upper_quartile(sort_by_x(tweets, factor))
 
     def bottom_quarter_by(tweets, factor):
-        return NotImplemented
-
+        return lower_quartile(sort_by_x(tweets, factor))
