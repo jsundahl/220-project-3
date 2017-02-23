@@ -83,5 +83,22 @@ class AnalyzeSpec(unittest.TestCase):
         }
         self.assertEqual(all_caps_tweets(self.tweets + [tweet]), [tweet])
 
+    def test_tweets_from_source(self):
+        tweet = {
+            "username": "Donald J. Trump",
+            "source": "Twitter for iPhone",
+            "content": "#1 #2 3 @1 @2 ASDASDASD",
+            "favorites": 53588,
+            "retweets": 10836,
+            "number": 4
+        }
+        alternate_tweets = self.tweets + [tweet]
+        self.assertEqual(android_tweets(alternate_tweets), self.tweets)
+        self.assertEqual(iphone_tweets(alternate_tweets), [tweet])
+
+    def test_average_x(self):
+        self.assertEqual(average_favorites(self.tweets), 50176)
+        self.assertEqual(average_retweets(self.tweets), 10286)
+
 if __name__ == '__main__':
     unittest.main()

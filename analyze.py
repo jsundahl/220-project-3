@@ -5,18 +5,6 @@ import json
 with open("tweets.json", "r") as tweet_db:
     tweets = json.load(tweet_db)
 
-    def head(xs):
-        if len(xs) == 0:
-            return []
-        else:
-            return xs[0]
-
-    def tail(xs):
-        if len(xs) == 0:
-            return []
-        else:
-            return xs[1:]
-
     def flatten(xs):
         def inner_flatten(ys, zs):
             if isinstance(zs, list):
@@ -36,6 +24,7 @@ with open("tweets.json", "r") as tweet_db:
 
     def to_lowercase(tweets):
         """Converts the content of each tweet in the list of tweets to lowercase"""
+        # todo: look at the example and redo this
         return list(map(lambda content: content.lower(), to_text(tweets)))
 
     def nonempty(tweets):
@@ -72,7 +61,9 @@ with open("tweets.json", "r") as tweet_db:
         return list(filter(lambda tweet: tweet["content"].isupper(), tweets))
 
     def create_word_dict(word_list):
-        # TODO: write this somehow
+        def concat_dicts(x, y):
+            return NotImplemented
+        reduce(lambda x, y: concat_dicts(x, y), word_list, dict())
         return NotImplemented
 
     def count_individual_words(tweets):
@@ -92,20 +83,26 @@ with open("tweets.json", "r") as tweet_db:
         sorted from most to least common and sorted in alphabetical order when the number of occurrences
         is the same."""
         return NotImplemented
+
+    def tweets_from_source(tweets, source):
+        return list(filter(lambda x: x["source"] == source, tweets))
+
     def iphone_tweets(tweets):
         """returns only the tweets from iphone"""
-        return NotImplemented
+        return tweets_from_source(tweets, "Twitter for iPhone")
 
     def android_tweets(tweets):
-        return NotImplemented
+        return tweets_from_source(tweets, "Twitter for Android")
+
+    def average_x(tweets, x):
+        total = reduce(lambda total, tweet: total + tweet[x], tweets, 0)
+        return int(round(total / len(tweets)))
 
     def average_favorites(tweets):
-        """"Computes the average number of favorites from the list of
-        tweets, rounding appropriately."""
-        return NotImplemented
+        return average_x(tweets, "favorites")
 
     def average_retweets(tweets):
-        return NotImplemented
+        return average_x(tweets, "retweets")
 
     def sort_by_favorites(tweets):
         """"sort tweets in ascending order of number of favorites"""
