@@ -40,7 +40,7 @@ with open("tweets.json", "r") as tweet_db:
 
     def nonempty(tweets):
         """remove all tweets with empty contents from the list of tweets"""
-        return NotImplemented
+        return list(filter(lambda tweet: tweet["content"] != "", tweets))
 
     def total_word_count(tweets):
         return NotImplemented
