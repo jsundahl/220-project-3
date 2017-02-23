@@ -54,6 +54,23 @@ class AnalyzeSpec(unittest.TestCase):
     def test_nonempty(self):
         self.assertEqual(nonempty(self.tweets), self.tweets[:3])
 
+    def test_total_word_count(self):
+        self.assertEqual(total_word_count(self.tweets), 63)
+
+    def test_words_with_char(self):
+        tweet = {
+            "username": "Donald J. Trump",
+            "source": "Twitter for Android",
+            "content": "#1 #2 3 @1 @2",
+            "favorites": 53588,
+            "retweets": 10836,
+            "number": 4
+        }
+        self.assertEqual(hashtags(tweet), ["#1", "#2"])
+        self.assertEqual(mentions(tweet), ['@1', '@2'])
+
+    def test_all_words_with(self):
+        self.assertEqual(all_mentions(self.tweets), ["@oreillyfactor"])
 
 if __name__ == '__main__':
     unittest.main()

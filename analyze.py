@@ -43,21 +43,29 @@ with open("tweets.json", "r") as tweet_db:
         return list(filter(lambda tweet: tweet["content"] != "", tweets))
 
     def total_word_count(tweets):
-        return NotImplemented
+        def word_count(tweet):
+            return len(tweet["content"].split(' '))
+        return reduce(lambda x, y: x + word_count(y), tweets, 0)
+
+    def words_with_char(tweet, char):
+        return list(filter(lambda x: char in x, tweet["content"].split(' ')))
 
     def hashtags(tweet):
         """get a list of all the hashtags in a tweet"""
-        return NotImplemented
+        return words_with_char(tweet, '#')
 
     def mentions(tweet):
         """get a list of all the mentions in a tweet"""
-        return NotImplemented
+        return words_with_char(tweet, '@')
+
+    def all_words_with(tweets, fn):
+        return reduce(lambda x, y: x + fn(y), tweets, [])
 
     def all_hashtags(tweets):
-        return NotImplemented
+        return all_words_with(tweets, hashtags)
 
     def all_mentions(tweets):
-        return NotImplemented
+        return all_words_with(tweets, mentions)
 
     def all_caps_tweets(tweets):
         """Returns a list of all tweets that are completely capitalized from the given list of tweets"""
