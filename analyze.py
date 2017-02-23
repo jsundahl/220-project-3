@@ -71,16 +71,21 @@ with open("tweets.json", "r") as tweet_db:
         """Returns a list of all tweets that are completely capitalized from the given list of tweets"""
         return list(filter(lambda tweet: tweet["content"].isupper(), tweets))
 
+    def create_word_dict(word_list):
+        # TODO: write this somehow
+        return NotImplemented
+
     def count_individual_words(tweets):
         """count word frequency and output as dictionary"""
-        return NotImplemented
+        word_list = reduce(lambda x, y: x + words_with_char(y, ""), tweets, [])
+        return create_word_dict(word_list)
 
     def count_individual_hashtags(tweets):
         """count hashtag frequency and output as dictionary"""
-        return NotImplemented
+        return create_word_dict(all_hashtags(tweets))
 
     def count_individual_mentions(tweets):
-        return NotImplemented
+        return create_word_dict(all_mentions(tweets))
 
     def n_most_common(n, word_count):
         """"Calculates the n most common keys in word_count ,
