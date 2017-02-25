@@ -80,10 +80,13 @@ with open("tweets.json", "r") as tweet_db:
         return create_word_dict(all_mentions(tweets))
 
     def n_most_common(n, word_count):
-        """"Calculates the n most common keys in word_count ,
+        """"Calculates the n most common keys in word_count,
         sorted from most to least common and sorted in alphabetical order when the number of occurrences
         is the same."""
-        return NotImplemented
+        pairs = [(k, v) for k, v in word_count.items()]
+        pairs_alphabetical = sort_by_x(pairs, 0)
+        sorted_pairs = sort_by_x(pairs_alphabetical, 1)
+        return sorted_pairs[len(sorted_pairs) - n:]
 
     def tweets_from_source(tweets, source):
         return list(filter(lambda x: x["source"] == source, tweets))

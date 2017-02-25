@@ -83,6 +83,17 @@ class AnalyzeSpec(unittest.TestCase):
         }
         self.assertEqual(all_caps_tweets(self.tweets + [tweet]), [tweet])
 
+    def test_n_most_common(self):
+        word_count = {
+            "word_1": 1,
+            "word_2": 2,
+            "word_3": 3,
+            "word_4": 4,
+            "z_word_5": 5,
+            "word_5": 5
+        }
+        self.assertEqual(n_most_common(3, word_count), [("word_4", 4), ("word_5", 5), ("z_word_5", 5)])
+
     def test_tweets_from_source(self):
         tweet = {
             "username": "Donald J. Trump",
