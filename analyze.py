@@ -68,11 +68,8 @@ with open("tweets.json", "r") as tweet_db:
         return list(filter(lambda tweet: tweet["content"].isupper(), tweets))
 
     def create_word_dict(word_list):
-        def concat_dicts(x, y):
-            # reduce again and loop over entries in y?
-            return NotImplemented
-        reduce(lambda x, y: concat_dicts(x, y), word_list, dict())
-        return NotImplemented
+        unique_list = set(word_list)
+        return reduce(lambda d, word: dict(list(d.items()) + list({word: word_list.count(word)}.items())), unique_list, dict())
 
     def count_individual_words(tweets):
         """count word frequency and output as dictionary"""
