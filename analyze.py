@@ -24,8 +24,15 @@ with open("tweets.json", "r") as tweet_db:
 
     def to_lowercase(tweets):
         """Converts the content of each tweet in the list of tweets to lowercase"""
-        # todo: look at the example and redo this
-        return list(map(lambda content: content.lower(), to_text(tweets)))
+        def lowercase_content(tweet):
+            return {
+                "username": tweet["username"],
+                "source": tweet["source"],
+                "content": tweet["content"].lower(),
+                "favorites": tweet["favorites"],
+                "retweets": tweet["retweets"]
+            }
+        return list(map(lowercase_content, tweets))
 
     def nonempty(tweets):
         """remove all tweets with empty contents from the list of tweets"""
